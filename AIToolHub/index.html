@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIToolHub - The Ultimate AI Tools Directory</title>
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary-color: #10b981;
+            --dark-bg: #111827;
+            --light-bg: #f9fafb;
+            --card-bg: #ffffff;
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --text-light: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .hero {
+            background: linear-gradient(to right, var(--primary-color), var(--primary-hover));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 9999px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .categories {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary-color);
+        }
+
+        .category {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            height: 160px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            /* width: 100%;
+            height: 100%; */
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .card-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .card-link:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .tag {
+            background-color: #e5e7eb;
+            color: var(--text-secondary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+        }
+
+        footer {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .newsletter input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .newsletter button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter button:hover {
+            background-color: #0d9669;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cards {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        .ribbon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 10% 50%);
+        }
+
+        .card {
+            position: relative;
+        }
+
+        /* Monetization features */
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(79, 70, 229, 0.9);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .new-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(16, 185, 129, 0.9);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                AI<span>ToolHub</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Top Tools</a></li>
+                    <li><a href="#">Compare</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Submit Tool</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Discover the Best AI Tools</h1>
+            <p>Find the perfect AI tools to enhance your productivity, creativity, and innovation</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for AI tools...">
+                <div class="search-icon">
+                    🔍
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison">
+        <div class="container" style="max-width: 1200px; margin: 4rem auto; padding: 0 2rem;">
+            <h2 class="section-title">Compare AI Tools</h2>
+            <p style="margin-bottom: 2rem;">Select multiple AI tools to compare their features, pricing, and reviews
+                side by side.</p>
+
+            <div class="comparison-tools" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+                <div class="tool-selector"
+                    style="flex: 1; min-width: 200px; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 10px;">
+                    <h4>Select Tool 1</h4>
+                    <select
+                        style="width: 100%; padding: 0.5rem; margin-top: 0.5rem; border-radius: 5px; border: 1px solid #e5e7eb;">
+                        <option>Choose an AI Tool</option>
+                        <option>Claude</option>
+                        <option>ChatGPT</option>
+                        <option>Gemini</option>
+                        <option>Midjourney</option>
+                        <option>DALL-E</option>
+                    </select>
+                </div>
+
+                <div class="tool-selector"
+                    style="flex: 1; min-width: 200px; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 10px;">
+                    <h4>Select Tool 2</h4>
+                    <select
+                        style="width: 100%; padding: 0.5rem; margin-top: 0.5rem; border-radius: 5px; border: 1px solid #e5e7eb;">
+                        <option>Choose an AI Tool</option>
+                        <option>Claude</option>
+                        <option>ChatGPT</option>
+                        <option>Gemini</option>
+                        <option>Midjourney</option>
+                        <option>DALL-E</option>
+                    </select>
+                </div>
+
+                <div class="tool-selector"
+                    style="flex: 1; min-width: 200px; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 10px;">
+                    <h4>Select Tool 3</h4>
+                    <select
+                        style="width: 100%; padding: 0.5rem; margin-top: 0.5rem; border-radius: 5px; border: 1px solid #e5e7eb;">
+                        <option>Choose an AI Tool</option>
+                        <option>Claude</option>
+                        <option>ChatGPT</option>
+                        <option>Gemini</option>
+                        <option>Midjourney</option>
+                        <option>DALL-E</option>
+                    </select>
+                </div>
+            </div>
+
+            <button
+                style="background-color: var(--primary-color); color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; font-weight: 500;">Compare
+                Tools</button>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" style="background-color: #f3f4f6; padding: 4rem 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <h2 class="section-title">Latest from Our Blog</h2>
+            <p style="margin-bottom: 2rem;">Stay updated with the latest AI trends, tutorials, and tool reviews.</p>
+
+            <div class="blog-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="blog-card"
+                    style="background-color: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                    <div class="blog-image" style="height: 200px; overflow: hidden;">
+                        <img src="/api/placeholder/400/320" alt="AI Art Tutorial"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="blog-content" style="padding: 1.5rem;">
+                        <span class="blog-category"
+                            style="color: var(--primary-color); font-size: 0.8rem; font-weight: 600;">TUTORIAL</span>
+                        <h3 style="margin: 0.5rem 0 1rem;">Getting Started with Midjourney: A Beginner's Guide</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Learn how to create stunning
+                            AI-generated artwork using Midjourney with our step-by-step guide.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--text-light); font-size: 0.85rem;">May 2, 2025</span>
+                            <a href="#"
+                                style="color: var(--primary-color); font-weight: 500; text-decoration: none;">Read More
+                                →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card"
+                    style="background-color: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                    <div class="blog-image" style="height: 200px; overflow: hidden;">
+                        <img src="/api/placeholder/400/320" alt="AI Tools Comparison"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="blog-content" style="padding: 1.5rem;">
+                        <span class="blog-category"
+                            style="color: var(--primary-color); font-size: 0.8rem; font-weight: 600;">REVIEW</span>
+                        <h3 style="margin: 0.5rem 0 1rem;">Claude vs ChatGPT vs Gemini: The Ultimate Comparison</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">We compare the top 3 AI assistants
+                            to help you choose the right one for your specific needs.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--text-light); font-size: 0.85rem;">Apr 28, 2025</span>
+                            <a href="#"
+                                style="color: var(--primary-color); font-weight: 500; text-decoration: none;">Read More
+                                →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card"
+                    style="background-color: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                    <div class="blog-image" style="height: 200px; overflow: hidden;">
+                        <img src="/api/placeholder/400/320" alt="AI News"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="blog-content" style="padding: 1.5rem;">
+                        <span class="blog-category"
+                            style="color: var(--primary-color); font-size: 0.8rem; font-weight: 600;">NEWS</span>
+                        <h3 style="margin: 0.5rem 0 1rem;">10 New AI Tools That Will Transform Your Workflow</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Discover the latest AI tools that
+                            are changing how we work, create, and innovate.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--text-light); font-size: 0.85rem;">Apr 15, 2025</span>
+                            <a href="#"
+                                style="color: var(--primary-color); font-weight: 500; text-decoration: none;">Read More
+                                →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#"
+                    style="display: inline-block; padding: 0.75rem 1.5rem; background-color: var(--primary-color); color: white; text-decoration: none; border-radius: 5px; font-weight: 500;">View
+                    All Articles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news">
+        <div class="container" style="max-width: 1200px; margin: 4rem auto; padding: 0 2rem;">
+            <h2 class="section-title">AI Industry News</h2>
+            <p style="margin-bottom: 2rem;">Stay updated with the latest developments in the AI industry.</p>
+
+            <div class="news-list">
+                <div class="news-item"
+                    style="display: flex; gap: 2rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #e5e7eb;">
+                    <div class="news-date" style="min-width: 80px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">07</div>
+                        <div style="font-size: 0.9rem; color: var(--text-light);">MAY</div>
+                    </div>
+                    <div class="news-content">
+                        <h3 style="margin-bottom: 0.5rem;"><a href="#"
+                                style="color: var(--text-primary); text-decoration: none;">OpenAI Announces GPT-5 with
+                                Enhanced Multimodal Capabilities</a></h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">OpenAI has unveiled its latest
+                            language model, GPT-5, featuring unprecedented multimodal understanding and generation
+                            abilities.</p>
+                        <a href="#" style="color: var(--primary-color); font-weight: 500; text-decoration: none;">Read
+                            Full Story →</a>
+                    </div>
+                </div>
+
+                <div class="news-item"
+                    style="display: flex; gap: 2rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #e5e7eb;">
+                    <div class="news-date" style="min-width: 80px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">05</div>
+                        <div style="font-size: 0.9rem; color: var(--text-light);">MAY</div>
+                    </div>
+                    <div class="news-content">
+                        <h3 style="margin-bottom: 0.5rem;"><a href="#"
+                                style="color: var(--text-primary); text-decoration: none;">Google Integrates Gemini AI
+                                Across All Workspace Applications</a></h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Google has announced the
+                            integration of its Gemini AI across the entire Google Workspace suite, bringing advanced AI
+                            capabilities to Docs, Sheets, and more.</p>
+                        <a href="#" style="color: var(--primary-color); font-weight: 500; text-decoration: none;">Read
+                            Full Story →</a>
+                    </div>
+                </div>
+
+                <div class="news-item"
+                    style="display: flex; gap: 2rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #e5e7eb;">
+                    <div class="news-date" style="min-width: 80px; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">03</div>
+                        <div style="font-size: 0.9rem; color: var(--text-light);">MAY</div>
+                    </div>
+                    <div class="news-content">
+                        <h3 style="margin-bottom: 0.5rem;"><a href="#"
+                                style="color: var(--text-primary); text-decoration: none;">Midjourney Releases Version
+                                6.0 with Video Generation Capabilities</a></h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Midjourney has launched version
+                            6.0 of its popular AI art generator, now featuring the ability to create short video clips
+                            from text prompts.</p>
+                        <a href="#" style="color: var(--primary-color); font-weight: 500; text-decoration: none;">Read
+                            Full Story →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#"
+                    style="display: inline-block; padding: 0.75rem 1.5rem; background-color: var(--primary-color); color: white; text-decoration: none; border-radius: 5px; font-weight: 500;">View
+                    All News</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container" style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem;">
+            <div class="filter-options" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+                <div class="filter-group">
+                    <label for="category-filter">Category:</label>
+                    <select id="category-filter" class="filter-select"
+                        style="padding: 0.5rem; border-radius: 5px; border: 1px solid #e5e7eb;">
+                        <option value="all">All Categories</option>
+                        <option value="language">Language & Text</option>
+                        <option value="image">Image Generation</option>
+                        <option value="audio">Audio & Voice</option>
+                        <option value="video">Video Generation</option>
+                        <option value="coding">Coding & Development</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="price-filter">Price:</label>
+                    <select id="price-filter" class="filter-select"
+                        style="padding: 0.5rem; border-radius: 5px; border: 1px solid #e5e7eb;">
+                        <option value="all">All Prices</option>
+                        <option value="free">Free</option>
+                        <option value="freemium">Freemium</option>
+                        <option value="paid">Paid</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sort-by">Sort By:</label>
+                    <select id="sort-by" class="filter-select"
+                        style="padding: 0.5rem; border-radius: 5px; border: 1px solid #e5e7eb;">
+                        <option value="popularity">Popularity</option>
+                        <option value="rating">Rating</option>
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <h2 class="section-title">Browse AI Tools by Category</h2>
+
+        <!-- Language & Text Processing -->
+        <div class="category">
+            <h3 class="category-title">Language & Text Processing</h3>
+            <div class="cards">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="featured-badge">Featured</div>
+                    <div class="card-image">
+                        <img src="https://www.anthropic.com/images/og/claude-og.jpg" alt="Claude AI"
+                            onerror="this.src='/api/placeholder/400/320'">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Claude</h4>
+                        <p class="card-description">Advanced AI assistant by Anthropic that excels at thoughtful
+                            dialogue and complex tasks.</p>
+                        <div class="card-rating" style="margin-bottom: 0.5rem;">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(1,245 reviews)</span>
+                        </div>
+                        <div class="card-meta">
+                            <span class="tag">Conversational AI</span>
+                            <a href="https://www.anthropic.com/claude" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-image">
+                        <div class="card-image">
+                            <img src="https://img.icons8.com/ios/500/chatgpt.png" alt="chatgpt" 
+                                 onerror="this.src='/api/placeholder/400/320'" 
+                                 width="200" height="150"/>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">ChatGPT</h4>
+                        <p class="card-description">OpenAI's popular language model that can understand and generate
+                            human-like text.</p>
+                        <div class="card-rating" style="margin-bottom: 0.5rem;">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(2,782 reviews)</span>
+                        </div>
+                        <div class="card-meta">
+                            <span class="tag">Conversational AI</span>
+                            <a href="https://chat.openai.com" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="new-badge">New</div>
+                    <div class="card-image">
+                        <img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini_1.width-1300.format-webp.webp"
+                            alt="Gemini" onerror="this.src='/api/placeholder/400/320'">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Gemini</h4>
+                        <p class="card-description">Google's multimodal AI model that can understand text, images, and
+                            more.</p>
+                        <div class="card-rating" style="margin-bottom: 0.5rem;">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(936 reviews)</span>
+                        </div>
+                        <div class="card-meta">
+                            <span class="tag">Multimodal AI</span>
+                            <a href="https://gemini.google.com" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Generation -->
+        <div class="category">
+            <h3 class="category-title">Image Generation</h3>
+            <div class="cards">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="featured-badge">Featured</div>
+                    <div class="card-image">
+                        <img src="https://cdn.geekwire.com/wp-content/uploads/2023/03/midjourney.jpeg" alt="Midjourney"
+                            onerror="this.src='/api/placeholder/400/320'">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Midjourney</h4>
+                        <p class="card-description">Create stunning artwork and illustrations from text descriptions.
+                        </p>
+                        <div class="card-rating" style="margin-bottom: 0.5rem;">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(3,578 reviews)</span>
+                        </div>
+                        <div class="card-meta">
+                            <span class="tag">Text-to-Image</span>
+                            <a href="https://www.midjourney.com" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-image">
+                        <img src="https://cdn.openai.com/dall-e-3/dalle3-announced/an_oil_painting_of_a_cute_cat_wearing_a_hat_and_sitting_on_a_boat_sailing_across_a_lake._mountains_and_forest_in_background._4k_detailed._high_resolution.webp"
+                            alt="DALL-E" onerror="this.src='/api/placeholder/400/320'">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">DALL-E</h4>
+                        <p class="card-description">OpenAI's AI system that creates realistic images and art from text
+                            descriptions.</p>
+                        <div class="card-meta">
+                            <span class="tag">Text-to-Image</span>
+                            <a href="https://openai.com/dall-e-3" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="card-image">
+                        <img src="https://stability.ai/assets/images/stable-diffusion-3-image-3.jpg"
+                            alt="Stable Diffusion" onerror="this.src='/api/placeholder/400/320'">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Stable Diffusion</h4>
+                        <p class="card-description">Open-source image generation model that can run locally on your
+                            computer.</p>
+                        <div class="card-meta">
+                            <span class="tag">Open Source</span>
+                            <a href="https://stability.ai" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audio & Voice AI -->
+        <div class="category">
+            <h3 class="category-title">Audio & Voice AI</h3>
+            <div class="cards">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/api/placeholder/400/320" alt="ElevenLabs">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">ElevenLabs</h4>
+                        <p class="card-description">Generate realistic AI voices with emotion and multilingual
+                            capabilities.</p>
+                        <div class="card-meta">
+                            <span class="tag">Text-to-Speech</span>
+                            <a href="https://elevenlabs.io" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="featured-badge">Featured</div>
+                    <div class="card-image">
+                        <img src="/api/placeholder/400/320" alt="Descript">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Descript</h4>
+                        <p class="card-description">All-in-one audio and video editing platform with AI voice cloning
+                            and transcription.</p>
+                        <div class="card-meta">
+                            <span class="tag">Audio Editing</span>
+                            <a href="https://www.descript.com" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="new-badge">New</div>
+                    <div class="card-image">
+                        <img src="/api/placeholder/400/320" alt="Speechify">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Speechify</h4>
+                        <p class="card-description">Turn any text into lifelike speech with natural-sounding AI voices.
+                        </p>
+                        <div class="card-meta">
+                            <span class="tag">Text-to-Speech</span>
+                            <a href="https://speechify.com" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Generation -->
+        <div class="category">
+            <h3 class="category-title">Video Generation</h3>
+            <div class="cards">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="featured-badge">Featured</div>
+                    <div class="card-image">
+                        <img src="/api/placeholder/400/320" alt="Runway ML">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Runway ML</h4>
+                        <p class="card-description">AI-powered creative tools for video editing, generation, and visual
+                            effects.</p>
+                        <div class="card-meta">
+                            <span class="tag">Video Creation</span>
+                            <a href="https://runwayml.com" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/api/placeholder/400/320" alt="Synthesia">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Synthesia</h4>
+                        <p class="card-description">Create professional videos with AI avatars speaking your script in
+                            minutes.</p>
+                        <div class="card-meta">
+                            <span class="tag">AI Avatars</span>
+                            <a href="https://www.synthesia.io" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="new-badge">New</div>
+                    <div class="card-image">
+                        <img src="/api/placeholder/400/320" alt="Sora">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Sora by OpenAI</h4>
+                        <p class="card-description">Text-to-video AI model that can create realistic and imaginative
+                            scenes from text.</p>
+                        <div class="card-meta">
+                            <span class="tag">Text-to-Video</span>
+                            <a href="https://openai.com/sora" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coding & Development -->
+        <div class="category">
+            <h3 class="category-title">Coding & Development</h3>
+            <div class="cards">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="featured-badge">Featured</div>
+                    <div class="card-image">
+                        <img src="/api/placeholder/400/320" alt="GitHub Copilot">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">GitHub Copilot</h4>
+                        <p class="card-description">AI pair programmer that helps you write code faster with suggestions
+                            as you type.</p>
+                        <div class="card-meta">
+                            <span class="tag">Code Assistant</span>
+                            <a href="https://github.com/features/copilot" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/api/placeholder/400/320" alt="Replit">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Replit</h4>
+                        <p class="card-description">Collaborative browser-based IDE with AI coding features to help you
+                            build faster.</p>
+                        <div class="card-meta">
+                            <span class="tag">Development</span>
+                            <a href="https://replit.com" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="new-badge">New</div>
+                    <div class="card-image">
+                        <img src="/api/placeholder/400/320" alt="Tabnine">
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Tabnine</h4>
+                        <p class="card-description">AI code completion tool that integrates with all major IDEs to boost
+                            productivity.</p>
+                        <div class="card-meta">
+                            <span class="tag">Code Completion</span>
+                            <a href="https://www.tabnine.com" class="card-link" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>AIToolHub</h3>
+                    <p style="color: #9ca3af; margin-bottom: 1rem;">Your comprehensive guide to the best AI tools and
+                        resources.</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">🐦</a>
+                        <a href="#">📸</a>
+                        <a href="#">🔗</a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Language & Text</a></li>
+                        <li><a href="#">Image Generation</a></li>
+                        <li><a href="#">Audio & Voice</a></li>
+                        <li><a href="#">Video Creation</a></li>
+                        <li><a href="#">Coding & Development</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">AI News</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Submit a Tool</a></li>
+                        <li><a href="#">Affiliate Program</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Join Our Newsletter</h3>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Your email address">
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 AIToolHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

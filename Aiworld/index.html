@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIToolHub - The Ultimate AI Tools Directory</title>
+    <style>
+        :root {
+            --primary-color: #4a6cfa;
+            --secondary-color: #6d28d9;
+            --accent-color: #10b981;
+            --text-color: #1f2937;
+            --light-bg: #f9fafb;
+            --border-color: #e5e7eb;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: #f8fafc;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1200/400') center/cover;
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .search-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        /* Category Section */
+        .category-section {
+            margin-bottom: 3rem;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.8rem;
+        }
+
+        .see-all {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tool-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .tool-image {
+            height: 160px;
+            overflow: hidden;
+        }
+
+        .tool-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .tool-card:hover .tool-image img {
+            transform: scale(1.05);
+        }
+
+        .tool-details {
+            padding: 1.5rem;
+        }
+
+        .tool-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .tool-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .tool-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .tool-rating {
+            display: flex;
+            align-items: center;
+            color: #f59e0b;
+        }
+
+        .tool-price {
+            background-color: #f3f4f6;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .free {
+            color: var(--accent-color);
+        }
+
+        .premium {
+            color: var(--secondary-color);
+        }
+
+        .tool-link {
+            display: block;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 0.8rem 0;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .tool-link:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Featured Section */
+        .featured-section {
+            background-color: white;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .featured-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .featured-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .featured-title {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-subtitle {
+            color: #6b7280;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            padding: 4rem 2rem;
+            color: white;
+        }
+
+        .newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #374151;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav li {
+                margin: 0.5rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .search-input, .search-btn {
+                width: 100%;
+                border-radius: 4px;
+            }
+
+            .search-btn {
+                margin-top: 0.5rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">🤖</span>
+                <span>AIToolHub</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Discover the Best AI Tools</h1>
+            <p>Find, compare, and use the most powerful AI tools for your specific needs</p>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search for AI tools...">
+                <button class="search-btn">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Filter Section -->
+        <section class="filter-section">
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label for="category">Category</label>
+                    <select id="category">
+                        <option value="all">All Categories</option>
+                        <option value="text">Text & Content</option>
+                        <option value="image">Image Generation</option>
+                        <option value="audio">Audio & Voice</option>
+                        <option value="video">Video Creation</option>
+                        <option value="coding">Programming & Coding</option>
+                        <option value="business">Business & Marketing</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price">Price</label>
+                    <select id="price">
+                        <option value="all">All Prices</option>
+                        <option value="free">Free</option>
+                        <option value="freemium">Freemium</option>
+                        <option value="paid">Paid</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="rating">Rating</label>
+                    <select id="rating">
+                        <option value="all">All Ratings</option>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4+ Stars</option>
+                        <option value="3">3+ Stars</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sort">Sort By</label>
+                    <select id="sort">
+                        <option value="popular">Most Popular</option>
+                        <option value="newest">Newest</option>
+                        <option value="rating">Highest Rating</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Text & Content AI Tools -->
+        <section class="category-section" id="categories">
+            <div class="category-header">
+                <h2 class="category-title">Text & Content AI Tools</h2>
+                <a href="#" class="see-all">See All</a>
+            </div>
+            <div class="tools-grid">
+                <!-- Tool Card 1 -->
+                <div class="tool-card" data-name="ChatGPT" data-category="text" data-rating="4.9" data-price="freemium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="ChatGPT">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">ChatGPT</h3>
+                        <p class="tool-description">Advanced AI chatbot for natural language processing and content generation.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★★ <span>(4.9)</span>
+                            </div>
+                            <div class="tool-price freemium">Freemium</div>
+                        </div>
+                        <a href="https://chat.openai.com" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+
+                <!-- Tool Card 2 -->
+                <div class="tool-card" data-name="Claude" data-category="text" data-rating="4.8" data-price="freemium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Claude">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Claude</h3>
+                        <p class="tool-description">Conversational AI assistant with advanced capabilities for detailed responses.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★★ <span>(4.8)</span>
+                            </div>
+                            <div class="tool-price freemium">Freemium</div>
+                        </div>
+                        <a href="https://www.anthropic.com/claude" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+
+                <!-- Tool Card 3 -->
+                <div class="tool-card" data-name="Jasper" data-category="text" data-rating="4.7" data-price="premium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Jasper">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Jasper</h3>
+                        <p class="tool-description">AI content platform for creating marketing copy, blogs, and social media content.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.7)</span>
+                            </div>
+                            <div class="tool-price premium">Premium</div>
+                        </div>
+                        <a href="https://www.jasper.ai" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+
+                <!-- Tool Card 4 -->
+                <div class="tool-card" data-name="Copy.ai" data-category="text" data-rating="4.5" data-price="freemium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Copy.ai">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Copy.ai</h3>
+                        <p class="tool-description">AI copywriting tool for generating marketing content and creative writing.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.5)</span>
+                            </div>
+                            <div class="tool-price freemium">Freemium</div>
+                        </div>
+                        <a href="https://www.copy.ai" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 5 -->
+                <div class="tool-card" data-name="Grammarly" data-category="text" data-rating="4.8" data-price="freemium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Grammarly">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Grammarly</h3>
+                        <p class="tool-description">AI-powered writing assistant for grammar checking and improving writing style.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★★ <span>(4.8)</span>
+                            </div>
+                            <div class="tool-price freemium">Freemium</div>
+                        </div>
+                        <a href="https://www.grammarly.com" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 6 -->
+                <div class="tool-card" data-name="Notion AI" data-category="text" data-rating="4.6" data-price="premium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Notion AI">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Notion AI</h3>
+                        <p class="tool-description">AI writing assistant integrated into Notion for summarizing, editing, and generating content.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.6)</span>
+                            </div>
+                            <div class="tool-price premium">Premium</div>
+                        </div>
+                        <a href="https://www.notion.so" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 7 -->
+                <div class="tool-card" data-name="Quillbot" data-category="text" data-rating="4.4" data-price="freemium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Quillbot">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Quillbot</h3>
+                        <p class="tool-description">AI paraphrasing tool that helps rewrite content while maintaining meaning.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.4)</span>
+                            </div>
+                            <div class="tool-price freemium">Freemium</div>
+                        </div>
+                        <a href="https://quillbot.com" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 8 -->
+                <div class="tool-card" data-name="Wordtune" data-category="text" data-rating="4.3" data-price="freemium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Wordtune">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Wordtune</h3>
+                        <p class="tool-description">AI writing companion that helps rephrase, rewrite, and enhance your content.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.3)</span>
+                            </div>
+                            <div class="tool-price freemium">Freemium</div>
+                        </div>
+                        <a href="https://www.wordtune.com" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 9 -->
+                <div class="tool-card" data-name="Writesonic" data-category="text" data-rating="4.2" data-price="freemium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Writesonic">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Writesonic</h3>
+                        <p class="tool-description">AI writing tool for creating blog posts, ads, product descriptions, and more.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.2)</span>
+                            </div>
+                            <div class="tool-price freemium">Freemium</div>
+                        </div>
+                        <a href="https://writesonic.com" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 10 -->
+                <div class="tool-card" data-name="Rytr" data-category="text" data-rating="4.1" data-price="freemium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Rytr">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Rytr</h3>
+                        <p class="tool-description">Affordable AI writing assistant for creating content across 40+ use cases.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.1)</span>
+                            </div>
+                            <div class="tool-price freemium">Freemium</div>
+                        </div>
+                        <a href="https://rytr.me" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 11 -->
+                <div class="tool-card" data-name="ContentBot" data-category="text" data-rating="4.0" data-price="premium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="ContentBot">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">ContentBot</h3>
+                        <p class="tool-description">AI content generation platform for creators, marketers, and businesses.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.0)</span>
+                            </div>
+                            <div class="tool-price premium">Premium</div>
+                        </div>
+                        <a href="https://contentbot.ai" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 12 -->
+                <div class="tool-card" data-name="Hemingway Editor" data-category="text" data-rating="4.2" data-price="freemium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Hemingway Editor">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Hemingway Editor</h3>
+                        <p class="tool-description">AI writing tool that makes your writing bold and clear by highlighting complex sentences.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.2)</span>
+                            </div>
+                            <div class="tool-price freemium">Freemium</div>
+                        </div>
+                        <a href="https://hemingwayapp.com" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Generation AI Tools -->
+        <section class="category-section">
+            <div class="category-header">
+                <h2 class="category-title">Image Generation AI Tools</h2>
+                <a href="#" class="see-all">See All</a>
+            </div>
+            <div class="tools-grid">
+                <!-- Tool Card 1 -->
+                <div class="tool-card" data-name="DALL-E" data-category="image" data-rating="4.9" data-price="premium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="DALL-E">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">DALL-E</h3>
+                        <p class="tool-description">AI system that creates realistic images and art from natural language descriptions.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★★ <span>(4.9)</span>
+                            </div>
+                            <div class="tool-price premium">Premium</div>
+                        </div>
+                        <a href="https://openai.com/dall-e-3" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+
+                <!-- Tool Card 2 -->
+                <div class="tool-card" data-name="Midjourney" data-category="image" data-rating="4.8" data-price="premium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Midjourney">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Midjourney</h3>
+                        <p class="tool-description">AI art generator that produces high-quality images from text descriptions.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★★ <span>(4.8)</span>
+                            </div>
+                            <div class="tool-price premium">Premium</div>
+                        </div>
+                        <a href="https://www.midjourney.com" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+
+                <!-- Tool Card 3 -->
+                <div class="tool-card" data-name="Stable Diffusion" data-category="image" data-rating="4.7" data-price="free">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Stable Diffusion">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Stable Diffusion</h3>
+                        <p class="tool-description">Open-source AI image generator that creates detailed images from text prompts.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.7)</span>
+                            </div>
+                            <div class="tool-price free">Free</div>
+                        </div>
+                        <a href="https://stability.ai" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+
+                <!-- Tool Card 4 -->
+                <div class="tool-card" data-name="Canva AI" data-category="image" data-rating="4.6" data-price="freemium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Canva AI">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Canva AI</h3>
+                        <p class="tool-description">AI-powered design platform with text-to-image and image editing capabilities.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.6)</span>
+                            </div>
+                            <div class="tool-price freemium">Freemium</div>
+                        </div>
+                        <a href="https://www.canva.com" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 5 -->
+                <div class="tool-card" data-name="Leonardo.AI" data-category="image" data-rating="4.5" data-price="freemium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Leonardo.AI">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Leonardo.AI</h3>
+                        <p class="tool-description">AI image generator for creating professional-quality assets for creative projects.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.5)</span>
+                            </div>
+                            <div class="tool-price freemium">Freemium</div>
+                        </div>
+                        <a href="https://leonardo.ai" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 6 -->
+                <div class="tool-card" data-name="Bing Image Creator" data-category="image" data-rating="4.3" data-price="free">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Bing Image Creator">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Bing Image Creator</h3>
+                        <p class="tool-description">Microsoft's free AI image generator powered by DALL-E technology.</p>
+                        <div class="tool-meta">
+                            <div class="tool-rating">
+                                ★★★★☆ <span>(4.3)</span>
+                            </div>
+                            <div class="tool-price free">Free</div>
+                        </div>
+                        <a href="https://www.bing.com/create" class="tool-link" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 7 -->
+                <div class="tool-card" data-name="Playground AI" data-category="image" data-rating="4.2" data-price="freemium">
+                    <div class="tool-image">
+                        <img src="/api/placeholder/400/250" alt="Playground AI">
+                    </div>
+                    <div class="tool-details">
+                        <h3 class="tool-name">Playground AI</h3>
+
+        <!-- Featured Section -->
+        <section class="featured-section">
+            <div class="featured-container">
+                <div class="featured-header">
+                    <h2 class="featured-title">Featured AI Tools</h2>
+                    <p class="featured-subtitle">Handpicked selection of the most innovative AI tools</p>
+                </div>
+                <div class="tools-grid">
+                    <!-- Tool Card 1 -->
+                    <div class="tool-card">
+                        <div class="tool-image">
+                            <img src="/api/placeholder/400/250" alt="Leonardo AI">
+                        </div>
+                        <div class="tool-details">
+                            <h3 class="tool-name">Leonardo AI</h3>
+                            <p class="tool-description">Create production-quality assets for creative projects with AI-generated images.</p>
+                            <div class="tool-meta">
+                                <div class="tool-rating">
+                                    ★★★★★ <span>(4.9)</span>
+                                </div>
+                                <div class="tool-price freemium">Freemium</div>
+                            </div>
+                            <a href="https://leonardo.ai" class="tool-link" target="_blank">Visit Website</a>
+                        </div>
+                    </div>
+
+                    <!-- Tool Card 2 -->
+                    <div class="tool-card">
+                        <div class="tool-image">
+                            <img src="/api/placeholder/400/250" alt="GitHub Copilot">
+                        </div>
+                        <div class="tool-details">
+                            <h3 class="tool-name">GitHub Copilot</h3>
+                            <p class="tool-description">AI pair programmer that helps write better code faster with suggestions.</p>
+                            <div class="tool-meta">
+                                <div class="tool-rating">
+                                    ★★★★★ <span>(4.8)</span>
+                                </div>
+                                <div class="tool-price premium">Premium</div>
+                            </div>
+                            <a href="https://github.com/features/copilot" class="tool-link" target="_blank">Visit Website</a>
+                        </div>
+                    </div>
+
+                    <!-- Tool Card 3 -->
+                    <div class="tool-card">
+                        <div class="tool-image">
+                            <img src="/api/placeholder/400/250" alt="RunwayML">
+                        </div>
+                        <div class="tool-details">
+                            <h3 class="tool-name">RunwayML</h3>
+                            <p class="tool-description">AI video generation and editing platform for creators and filmmakers.</p>
+                            <div class="tool-meta">
+                                <div class="tool-rating">
+                                    ★★★★☆ <span>(4.7)</span>
+                                </div>
+                                <div class="tool-price premium">Premium</div>
+                            </div>
+                            <a href="https://runwayml.com" class="tool-link" target="_blank">Visit Website</a>
+                        </div>
+                    </div>
+
+                    <!-- Tool Card 4 -->
+                    <div class="tool-card">
+                        <div class="tool-image">
+                            <img src="/api/placeholder/400/250" alt="Perplexity AI">
+                        </div>
+                        <div class="tool-details">
+                            <h3 class="tool-name">Perplexity AI</h3>
+                            <p class="tool-description">AI-powered search engine that provides accurate answers with cited sources.</p>
+                            <div class="tool-meta">
+                                <div class="tool-rating">
+                                    ★★★★☆ <span>(4.6)</span>
+                                </div>
+                                <div class="tool-price freemium">Freemium</div>
+                            </div>
+                            <a href="https://www.perplexity.ai" class="tool-link" target="_blank">Visit Website</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="newsletter-container">
+                <h2>Stay Updated with AI Innovations</h2>
+                <p>Subscribe to our newsletter and get the latest updates on new AI tools and industry news</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address">
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About AIToolHub</h3>
+                <p>The ultimate directory for discovering and comparing AI tools across all categories. Find the perfect AI solution for your needs.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">f</a>
+                    <a href="#" class="social-link">t</a>
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">ig</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Text & Content</a></li>
+                    <li><a href="#">Image Generation</a></li>
+                    <li><a href="#">Audio & Voice</a></li>
+                    <li><a href="#">Video Creation</a></li>
+                    <li><a href="#">Programming & Coding</a></li>
+                    <li><a href="#">Business & Marketing</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Tutorials</a></li>
+                    <li><a href="#">AI Tool Comparisons</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Advertise With Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AIToolHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const categorySelect = document.getElementById('category');
+            const priceSelect = document.getElementById('price');
+            const ratingSelect = document.getElementById('rating');
+            const sortSelect = document.getElementById('sort');
+            const searchInput = document.querySelector('.search-input');
+            const searchBtn = document.querySelector('.search-btn');
+            
+            // Sample filtering functionality (would need to be expanded in production)
+            searchBtn.addEventListener('click', function() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const toolCards = document.querySelectorAll('.tool-card');
+                
+                toolCards.forEach(card => {
+                    const toolName = card.querySelector('.tool-name').textContent.toLowerCase();
+                    const toolDesc = card.querySelector('.tool-description').textContent.toLowerCase();
+                    
+                    if (toolName.includes(searchTerm) || toolDesc.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Filter change event listeners would be added here
+            const filters = [categorySelect, priceSelect, ratingSelect, sortSelect];
+            filters.forEach(filter => {
+                filter.addEventListener('change', applyFilters);
+            });
+            
+            function applyFilters() {
+                // This would contain the filtering logic in a real implementation
+                console.log('Filters applied:', {
+                    category: categorySelect.value,
+                    price: priceSelect.value,
+                    rating: ratingSelect.value,
+                    sort: sortSelect.value
+                });
+                
+                // Show "filtering in progress" notification
+                alert('Filtering functionality would be implemented here in the full version.');
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Tool card hover effects
+            const toolCards = document.querySelectorAll('.tool-card');
+            toolCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
